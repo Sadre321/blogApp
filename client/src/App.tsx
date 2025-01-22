@@ -1,17 +1,13 @@
-import Info from "./Components/Info/Info"
-import Navbar from "./Components/Navbar/Navbar";
-import Content from "./Components/Content/Content";
+import { Route, Routes } from 'react-router'
+import Home from "./Pages/Home";
+
 function App() {
   return (
-    <div className="h-screen bg-black text-white">
-      <div className="container mx-auto">
-        <div className="mx-10">
-          <Navbar />
-          <Info/>
-          <Content/>
-        </div>
-      </div>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+      </Routes>
+    </>
   );
 }
 

@@ -2,10 +2,10 @@ import Navbar from "../Components/Navbar/Navbar";
 import Footer from "../Components/Footer/Footer";
 
 interface BaseLayoutProps {
-    children:React.node
-};
+  children: React.node;
+}
 
-const BaseLayouts:React.FC<BaseLayoutProps> = ({children}) => {
+const BaseLayouts: React.FC<BaseLayoutProps> = ({ children }) => {
   return (
     <div className="bg-black text-white">
       <div className="container mx-auto">
@@ -14,9 +14,9 @@ const BaseLayouts:React.FC<BaseLayoutProps> = ({children}) => {
           {children}
         </div>
       </div>
-          <Footer/>
+      <Footer />
     </div>
-)
-}
+  );
+};
 
-export default BaseLayouts
+export default BaseLayouts;

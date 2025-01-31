@@ -47,7 +47,7 @@ const Navbar = () => {
                 ? "bg-yellow-950 text-yellow-600 px-3 py-2 rounded-lg"
                 : "px-3 py-2 rounded-lg transition duration-200"
             }
-            to="/moments"
+            to="/dump"
           >
             Anlar
           </NavLink>

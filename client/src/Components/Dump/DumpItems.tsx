@@ -4,7 +4,7 @@ const DumpItems = ({data}) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-5">
-        <h2 className="h-8 lg:h-9 px-4 sticky top-0 rounded-full bg-orange-400  text-sm lg:text-lg text-white inline-flex items-center">
+        <h2 className="h-8 lg:h-9 px-4 sticky top-3 rounded-full bg-orange-400  text-sm lg:text-lg text-white inline-flex items-center">
           {data.date}
         </h2>
         <img

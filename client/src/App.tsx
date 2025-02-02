@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router'
 import Home from "./Pages/Home";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import Blog from "./Pages/Blog/Blog";
 import AdminBlog from "./Pages/Dashboard/Blog/Blog";
 import AdminBlogCreate from "./Pages/Dashboard/Blog/BlogCreate";
@@ -16,6 +17,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/admin" element={<Dashboard/>}/>
         <Route path="/blogs" element={<Blog/>}/>
         <Route path="/bookmarks" element={<Bookmark/>}/>
         <Route path="/dump" element={<Dump/>}/>

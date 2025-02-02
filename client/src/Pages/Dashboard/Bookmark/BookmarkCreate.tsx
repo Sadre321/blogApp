@@ -37,7 +37,6 @@ const BookmarkCreate = () => {
       <Form.Item<FieldType>
         label="Sayfa Aciklamasi"
         name="bookMarkDesc"
-        rules={[{ required: true, message: "Lutfen sayfanin aciklamasini girin." }]}
       >
         <Input />
       </Form.Item>

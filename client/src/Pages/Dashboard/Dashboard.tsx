@@ -1,53 +1,72 @@
 import React from "react";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import {
+  LineChart,
+  Legend,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Line,
+  Tooltip,
+} from "recharts";
+import { Flex, Card, Typography } from "antd";
 
 const Dashboard: React.FC = () => {
   const data = [
-    { name: "Pazartesi", uv: 4000, pv: 2400 },
-    { name: "Sali", uv: 3000, pv: 1398 },
-    { name: "Carsamba", uv: 2000, pv: 9800 },
-    { name: "Persembe", uv: 2780, pv: 3908 },
-    { name: "Cuma", uv: 1890, pv: 4800 },
-    { name: "Cumartesi", uv: 2390, pv: 3800 },
-    { name: "Pazar", uv: 3490, pv: 4300 },
+    { name: "Pazartesi", ziyaretci: 4000 },
+    { name: "Sali", ziyaretci: 3000 },
+    { name: "Carsamba", ziyaretci: 2000 },
+    { name: "Persembe", ziyaretci: 2780 },
+    { name: "Cuma", ziyaretci: 1890 },
+    { name: "Cumartesi", ziyaretci: 2390 },
+    { name: "Pazar", ziyaretci: 3490 },
   ];
 
   return (
-    <AreaChart
-      width={window.innerWidth * 0.8} // Ekran boyutuna göre dinamik genişlik
-      height={300} // Yüksekliği esnek tutarak daha iyi görünüm
-      data={data}
-      margin={{ top: 20, right: 30, left: 20, bottom: 5 }} // Margin değerini güncelledim
-    >
-      <defs>
-        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-        </linearGradient>
-        <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-          <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-        </linearGradient>
-      </defs>
-      <XAxis dataKey="name" label={{ value: 'Gunler', position: 'insideBottomRight', offset: -5 }} />
-      <YAxis label={{ value: 'Gunluk ziyaretci ', angle: -90, position: 'insideLeft' }} />
-      <CartesianGrid strokeDasharray="3 3" />
-      <Tooltip />
-      <Area
-        type="monotone"
-        dataKey="uv"
-        stroke="#8884d8"
-        fillOpacity={1}
-        fill="url(#colorUv)"
-      />
-      <Area
-        type="monotone"
-        dataKey="pv"
-        stroke="#82ca9d"
-        fillOpacity={1}
-        fill="url(#colorPv)"
-      />
-    </AreaChart>
+    <Flex vertical="vertical" justify="space-between" gap={40}>
+      <Flex gap={30}>
+        <Card style={{ width: 550 }}>
+          <Typography.Title level={5}>Toplam Ziyaretci</Typography.Title>
+          <Flex justify="space-between" align="baseline">
+            <Typography.Title level={3}>413</Typography.Title>
+            <Typography>Ziyaretci</Typography>
+          </Flex>
+        </Card>
+        <Card style={{ width: 550 }}>
+          <Typography.Title level={5}>Toplam Blog</Typography.Title>
+          <Flex justify="space-between" align="baseline">
+            <Typography.Title level={3}>413</Typography.Title>
+            <Typography>Blog</Typography>
+          </Flex>
+        </Card>
+        <Card style={{ width: 550 }}>
+          <Typography.Title level={5}>Toplam Yer Isareti</Typography.Title>
+          <Flex justify="space-between" align="baseline">
+            <Typography.Title level={3}>413</Typography.Title>
+            <Typography>Site</Typography>
+          </Flex>
+        </Card>
+        <Card style={{ width: 550 }}>
+          <Typography.Title level={5}>Toplam Fotograf</Typography.Title>
+          <Flex justify="space-between" align="baseline">
+            <Typography.Title level={3}>413</Typography.Title>
+            <Typography>Fotograf</Typography>
+          </Flex>
+        </Card>
+      </Flex>
+      <LineChart
+        width={1600}
+        height={350}
+        data={data}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="ziyaretci" stroke="#82ca9d" />
+      </LineChart>
+    </Flex>
   );
 };
 

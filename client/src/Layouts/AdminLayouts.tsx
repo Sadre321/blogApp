@@ -1,18 +1,19 @@
 import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { useNavigate,useLocation } from "react-router";  // 'navigate' işlevini kullanabilmek için bu importu ekliyoruz
+import { useNavigate, useLocation } from "react-router"; // 'navigate' işlevini kullanabilmek için bu importu ekliyoruz
 import {
   LaptopOutlined,
   PieChartOutlined,
   AppstoreOutlined,
   RollbackOutlined,
-  PictureOutlined 
+  PictureOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 
 const { Header, Content, Sider } = Layout;
 
-const AdminLayouts: React.FC = ({children}:{children:React.node}) => {
-  const navigate = useNavigate();  // navigate işlevini burada tanımlıyoruz
+const AdminLayouts: React.FC = ({ children }: { children: React.node }) => {
+  const navigate = useNavigate(); // navigate işlevini burada tanımlıyoruz
   const location = useLocation();
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -75,23 +76,24 @@ const AdminLayouts: React.FC = ({children}:{children:React.node}) => {
           onClick: () => navigate("/admin/dump/create"),
         },
       ],
-    },{
+    },
+    {
       key: "11",
       icon: <RollbackOutlined />,
       label: "Ana Sayfaya Git",
-      onClick: () => window.location.href = "/",
-    }
+      onClick: () => (window.location.href = "/"),
+    },
   ];
 
   const dynamicBreadCrumb = (pathname: string) => {
-    const breadCrumbParts = pathname.split("/").filter(x => x);  // "breadCrumbPart" -> "breadCrumbParts" anlam daha uygun
+    const breadCrumbParts = pathname.split("/").filter((x) => x); // "breadCrumbPart" -> "breadCrumbParts" anlam daha uygun
     return breadCrumbParts.map((bread) => ({
-      title: bread
+      title: bread,
     }));
   };
-  
+
   const breadCrumb = dynamicBreadCrumb(location.pathname);
-  
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider width={200} style={{ background: colorBgContainer }}>
@@ -103,16 +105,29 @@ const AdminLayouts: React.FC = ({children}:{children:React.node}) => {
         />
       </Sider>
       <Layout style={{ padding: "0 24px 24px" }}>
-        <Header style={{ display: "flex", alignItems: "center", padding: 0 }}>
+        <Header
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: 0,
+          }}
+        >
           <Menu
             mode="horizontal"
             defaultSelectedKeys={["1"]}
             items={[{ key: "1", label: "Dashboard" }]}
             style={{ flex: 1, minWidth: 0 }}
           />
+          <Menu
+            mode="horizontal"
+            items={[{ key: "1", label: "Logout", icon: <LogoutOutlined /> }]}
+            style={{ minWidth: 0 }}
+          />
         </Header>
+
         <Breadcrumb
-          items={breadCrumb.map(x=> x)}
+          items={breadCrumb.map((x) => x)}
           style={{ margin: "16px 0" }}
         />
         <Content

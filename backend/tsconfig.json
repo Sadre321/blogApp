@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",   // Derleme çıktısını dist klasörüne al
+    "rootDir": "./src"    // TypeScript dosyalarının bulunduğu klasör
+  },
+  "include": ["src/**/*.ts"],  // src dizinindeki tüm .ts dosyalarını dahil et
+  "exclude": ["node_modules"]
+}

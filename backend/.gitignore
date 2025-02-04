@@ -1,0 +1,41 @@
+# Node.js modülleri
+node_modules/
+
+# Backend derleme dosyaları (TypeScript derleme çıktıları, build klasörleri vb.)
+dist/
+build/
+*.tsbuildinfo
+
+# Çevre dosyaları (Environment files)
+.env
+
+# Log dosyaları
+*.log
+
+# IDE/Editor dosyaları
+.vscode/
+.idea/
+
+# MacOS için .DS_Store dosyası
+.DS_Store
+
+# Windows için Thumbs.db dosyası
+Thumbs.db
+
+# npm paketlerinin cache'leri
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Jest test sonuçları
+coverage/
+
+# TypeScript declaration dosyaları (kendi dosyalarınız için eklenebilir)
+*.d.ts
+
+# Sadece belirli platformlar için gereksiz dosyalar
+*.sublime-workspace
+*.sublime-project
+
+# Bazı editor ve IDE tarafından oluşturulan geçici dosyalar
+*.swp

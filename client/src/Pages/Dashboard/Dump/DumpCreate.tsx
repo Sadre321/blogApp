@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import {  message, Upload, FormProps, Button, Form, Input } from "antd";
+import {
+  message,
+  Upload,
+  FormProps,
+  DatePicker,
+  Button,
+  Form,
+  Input,
+} from "antd";
 import type { GetProp, UploadProps } from "antd";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
@@ -63,6 +71,10 @@ const DumpCreate = () => {
     console.log("Failed:", errorInfo);
   };
 
+  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
   return (
     <Form
       name="basic"
@@ -74,26 +86,29 @@ const DumpCreate = () => {
       <Form.Item<FieldType>
         label="Tarih"
         name="date"
-        rules={[{ required: true, message: "Lutfen sayfanin ismini girin." }]}
+        rules={[{ required: true, message: "Lütfen sayfanın tarihini girin." }]}
       >
-        <Input />
+        <DatePicker
+          onChange={onChange}
+          style={{ width: "100%" }}
+        />
       </Form.Item>
 
-        <Upload
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-        >
-          {imageUrl ? (
-            <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-          ) : (
-            uploadButton
-          )}
-        </Upload>
+      <Upload
+        name="avatar"
+        listType="picture-card"
+        className="avatar-uploader"
+        showUploadList={false}
+        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+        beforeUpload={beforeUpload}
+        onChange={handleChange}
+      >
+        {imageUrl ? (
+          <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+        ) : (
+          uploadButton
+        )}
+      </Upload>
 
       <Form.Item<FieldType>
         label="Aciklama"

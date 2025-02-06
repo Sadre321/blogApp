@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "commonjs",
+    "module": "CommonJS",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",   // Derleme çıktısını dist klasörüne al
-    "rootDir": "./src"    // TypeScript dosyalarının bulunduğu klasör
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["src/**/*.ts"],  // src dizinindeki tüm .ts dosyalarını dahil et
-  "exclude": ["node_modules"]
+  "include": ["src/**/*.ts", "types/**/*.d.ts"]
 }

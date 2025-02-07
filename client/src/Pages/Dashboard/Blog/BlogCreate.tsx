@@ -1,4 +1,3 @@
-import React from "react";
 import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 
@@ -16,9 +15,9 @@ const BlogCreate = () => {
   const day = today.getDate();
 
   // Bugünün tarihini "yyyy-mm-dd" formatında oluşturuyoruz
-  const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${
+  const formattedDate = `${
     day < 10 ? '0' + day : day
-  }`;
+  }-${month < 10 ? '0' + month : month}-${year}`;
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Success:", values);
@@ -68,7 +67,6 @@ const BlogCreate = () => {
       <Form.Item<FieldType>
         label="Tarih"
         name="date"
-        rules={[{ required: true, message: "Lütfen bir tarih girin." }]}
       >
         <Input disabled />
       </Form.Item>

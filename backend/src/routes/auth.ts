@@ -37,7 +37,8 @@ router.post("/login", async (req: Request, res: Response):Promise<string|any> =>
             message: "Login successful",
             user: { email: user.email }
         });
-    } catch (error) {
+    } 
+    catch (error) {
         console.error("Error during login:", error);
         return res.status(500).json({ message: "Server error" });
     }

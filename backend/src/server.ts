@@ -1,5 +1,4 @@
 import express from 'express';
-import session from "express-session";
 import cors from "cors";
 import logger from "morgan";
 import dotenv from "dotenv";
@@ -18,13 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(logger("dev"));
-
-app.use(session({
-  secret: String(process.env.SESSION_KEY), // Güvenlik anahtarı
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // 'secure: true' yalnızca HTTPS bağlantılarında çalışır
-}));
 
 // MongoDB bağlantısı
 (async () => {

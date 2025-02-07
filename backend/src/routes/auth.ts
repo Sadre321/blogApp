@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import Auth from "../models/auth";
-
+import JWT from "jsonwebtoken";
 
 // Router'ı oluşturuyoruz
 const router = express.Router();
@@ -12,7 +12,7 @@ router.get("/", (req: Request, res: Response): void => {
 });
 
 // Giriş (login) rotası
-router.post("/login", async (req: Request, res: Response): Promise<string|any> => {
+router.post("/login", async (req: Request, res: Response):Promise<string|any> => {
     try {
         const { email, password } = req.body;
 
@@ -30,16 +30,15 @@ router.post("/login", async (req: Request, res: Response): Promise<string|any> =
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        // Kullanıcıyı session'a kaydetme
-        req.session.user = {
-            id: user._id,  // Veya kullanıcının saklamak istediğiniz diğer bilgileri
-            email: user.email
-        };
+        JWT.sign({ userId: user._id, email: user.email,name:user.name },String(process.env.JWT_SECRET_KEY),{expiresIn:"1h"});
 
         // Başarılı giriş
-        return res.status(200).json({ message: "Login successful", user: { email: user.email } });
+        return res.status(200).json({
+            message: "Login successful",
+            user: { email: user.email }
+        });
     } catch (error) {
-        console.error('Error during login:', error); // Hata loglaması ekledim
+        console.error("Error during login:", error);
         return res.status(500).json({ message: "Server error" });
     }
 });
@@ -47,7 +46,7 @@ router.post("/login", async (req: Request, res: Response): Promise<string|any> =
 // Kayıt (register) rotası
 router.post("/register", async (req: Request, res: Response): Promise<void> => {
     try {
-        const { name,email, password } = req.body;
+        const { name, email, password } = req.body;
 
         // Kullanıcı zaten var mı kontrolü
         const userExisted = await Auth.findOne({ email });

@@ -1,13 +1,11 @@
-import {Router,Response,Request} from "express";
+import upload from "../middleware/uploadMiddleware";
+import dump from "../controllers/dump";
+import { Router } from "express";
 
 const router = Router();
 
-router.get("/",(req:Request,res:Response)=>{
-    try {
-        res.status(200).json({message:"hi"})
-    } catch (error) {
-        res.status(500).json({message:"Server error"});
-    }
-});
+router.get("/",dump.GetAllDumps);
+
+router.post("/", upload.array("file", 5),dump.CreateDump );
 
 export default router;

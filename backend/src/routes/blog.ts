@@ -1,11 +1,12 @@
 import { Request,Response,Router } from "express";
 const router = Router();
 
+import authMiddleware from '../middleware/authMiddleware';
+
 import Blog from "../models/blog";
 
 router.get("/",async(req:Request,res:Response):Promise<string|any>=>{
     try {
-
         const blogs = await Blog.find();
 
         res.status(200).json({blogs});
@@ -38,7 +39,7 @@ router.post("/",async (req:Request,res:Response):Promise<string|any>=>{
 
         await newBlog.save();
 
-        res.status(201).json({message:"Blog is created",data:req.body});
+        res.status(201).json({message:"Blog is created"});
     } catch (error) {
         res.status(500).json({ message: "Server Error" });
     }

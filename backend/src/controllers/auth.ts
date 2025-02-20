@@ -22,11 +22,12 @@ const Login = async (req: Request, res: Response):Promise<string|any> => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        JWT.sign({ userId: user._id, email: user.email,name:user.name },String(process.env.JWT_SECRET_KEY),{expiresIn:"1h"});
+        const token = JWT.sign({ userId: user._id, email: user.email,name:user.name },String(process.env.JWT_SECRET_KEY),{expiresIn:"1h"});
 
         // Başarılı giriş
         return res.status(200).json({
             message: "Login successful",
+            token,
             user: { email: user.email }
         });
     } 

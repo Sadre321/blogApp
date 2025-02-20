@@ -1,10 +1,5 @@
+import { imgData } from "../../types";
 import DumpItems from "./DumpItems";
-
-interface imgData {
-  date: string;
-  img: string;
-  text: string;
-}
 
 const Dump: React.FC = () => {
   const data: imgData[] = [

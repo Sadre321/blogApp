@@ -1,6 +1,10 @@
-import React from "react";
+import { imgData } from "../../types";
 
-const DumpItems = ({data}) => {
+interface DumpItems{
+  data:imgData
+}
+
+const DumpItems:React.FC<DumpItems> = ({data}) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-5">

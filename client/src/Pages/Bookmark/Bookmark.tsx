@@ -1,14 +1,5 @@
 import BookmarkComponent from "../../Components/Bookmark/Bookmark";
-
-interface BookmarkContent {
-  heading: string;
-  text: string;
-}
-
-interface BookmarksLayouts {
-  date: string;
-  content: BookmarkContent[];
-}
+import { BookmarksLayouts } from "../../types";
 
 const Bookmark: React.FC = () => {
   const bookMarks: BookmarksLayouts[] | null = [

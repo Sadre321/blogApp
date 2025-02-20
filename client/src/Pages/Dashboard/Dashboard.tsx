@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <Flex vertical="vertical" justify="space-between" gap={40}>
+    <Flex vertical={true} justify="space-between" gap={40}>
       <Flex gap={30}>
         <Card style={{ width: 550 }}>
           <Typography.Title level={5}>Toplam Ziyaretci</Typography.Title>

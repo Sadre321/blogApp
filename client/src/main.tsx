@@ -3,11 +3,14 @@ import "./index.css";
 import App from "./App.tsx";
 import Layouts from "./Layouts/Layouts";
 import { BrowserRouter } from "react-router";
+import { AuthProvider } from "./context/authContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <Layouts>
-      <App />
-    </Layouts>
+    <AuthProvider>
+      <Layouts>
+        <App />
+      </Layouts>
+    </AuthProvider>
   </BrowserRouter>
 );

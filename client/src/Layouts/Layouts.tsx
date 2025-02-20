@@ -1,8 +1,9 @@
 import BaseLayouts from "./BaseLayouts";
 import AdminLayouts from "./AdminLayouts";
 import { useLocation } from "react-router";
+import { AdminLayout } from "../types";
 
-const Layouts: React.Fc = ({ children }: { children: React.node }) => {
+const Layouts: React.FC<AdminLayout> = ({ children }) => {
   const location = useLocation();
 
   return (

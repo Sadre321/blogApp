@@ -1,7 +1,12 @@
+import { BookmarksLayouts } from "../../types";
 import BookmarkItem from "./BookmarkItem";
 import { useLocation,Link } from "react-router";
 
-const Bookmark: React.FC = ({ bookMarks }) => {
+interface Bookmark {
+  bookMarks:BookmarksLayouts[]
+}
+
+const Bookmark: React.FC<Bookmark> = ({ bookMarks }) => {
   const path = useLocation();
 
   if (!bookMarks || bookMarks.length === 0) {

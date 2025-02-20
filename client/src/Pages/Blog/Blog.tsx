@@ -1,15 +1,6 @@
 import React from "react";
 import BlogComponent from "../../Components/Blog/Blogs";
-
-interface BlogPostContent {
-  text: string;
-  hashtags: string;
-}
-
-interface BlogPost {
-  date: string;
-  content: BlogPostContent[];
-}
+import { BlogPost } from "../../types";
 
 const BlogPage: React.FC = () => {
   const blogPosts: BlogPost[] | null= [

@@ -1,11 +1,8 @@
 import Navbar from "../Components/Navbar/Navbar";
 import Footer from "../Components/Footer/Footer";
+import { AdminLayout } from "../types";
 
-interface BaseLayoutProps {
-  children: React.node;
-}
-
-const BaseLayouts: React.FC<BaseLayoutProps> = ({ children }) => {
+const BaseLayouts: React.FC<AdminLayout> = ({ children }) => {
   return (
     <div className="bg-black text-white">
       <div className="container mx-auto">

@@ -1,12 +1,6 @@
-import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
-
-type FieldType = {
-    bookmark?: string;
-    bookMarkDesc?: string;
-    bookMarkUri?: string;
-  };
+import { FieldType } from '../../../types';
 
 const BookmarkCreate = () => {
       

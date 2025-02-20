@@ -1,4 +1,10 @@
-const BookmarkItem: React.FC = ({ content }) => {
+import { BookmarkContent } from "../../types";
+
+interface BookmarkItem {
+  content:BookmarkContent
+}
+
+const BookmarkItem: React.FC<BookmarkItem> = ({ content }) => {
   return (
     <>
       <div

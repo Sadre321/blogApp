@@ -1,18 +1,38 @@
 import type { FormProps } from 'antd';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { FieldType } from '../../../types';
+import { useAuth } from '../../../context/authContext';
 
 const BookmarkCreate = () => {
-      
-      const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-        console.log('Success:', values);
-      };
-      
-      const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
-  
-    return (
+
+  const { token } = useAuth();
+  const apiUri = import.meta.env.VITE_API_URI;
+  const [form] = Form.useForm();
+
+  const onFinish: FormProps<FieldType>['onFinish'] = async(values) => {
+   
+    try {
+      const response = await fetch(`${apiUri}/bookmark`, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },body:JSON.stringify(values)});
+      const data = await response.json();
+      if (response.ok) {
+        message.success("Yer Tutucu olusturuldu");
+        form.resetFields();
+      } else {
+        message.error("Yer Tutucu olusturulamadi.");
+        console.log(data.message);
+      }
+    }
+    catch (err:any) {
+      console.log("Hata : " + err.message);
+      message.error("Server hatasi.");
+    }
+  };
+
+  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
+  return (
     <Form
       name="basic"
       layout="vertical"
@@ -22,7 +42,7 @@ const BookmarkCreate = () => {
     >
       <Form.Item<FieldType>
         label="Sayfanin Ismi"
-        name="bookmark"
+        name="title"
         rules={[{ required: true, message: "Lutfen sayfanin ismini girin." }]}
       >
         <Input />
@@ -30,14 +50,14 @@ const BookmarkCreate = () => {
 
       <Form.Item<FieldType>
         label="Sayfa Aciklamasi"
-        name="bookMarkDesc"
+        name="description"
       >
         <Input />
       </Form.Item>
 
       <Form.Item<FieldType>
         label="Sayfa URL"
-        name="bookMarkUri"
+        name="url"
         rules={[{ required: true, message: "Lutfen sayfanin url'sini girin." }]}
       >
         <Input />

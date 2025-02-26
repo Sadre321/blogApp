@@ -17,9 +17,7 @@ export interface imgData {
 }
 
 export interface FieldType {
-  bookmark?: string;
-  bookMarkDesc?: string;
-  bookMarkUri?: string;
+  url?: string;
   title?: string;
   description?: string;
   tags?: string[];

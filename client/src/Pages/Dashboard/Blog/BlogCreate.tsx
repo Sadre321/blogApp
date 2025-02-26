@@ -12,27 +12,28 @@ const BlogCreate = () => {
   const year = today.getFullYear();
   const month = today.getMonth() + 1; // Ay 0-11 arası olduğu için 1 ekliyoruz
   const day = today.getDate();
-
-
+  
   // Bugünün tarihini "yyyy-mm-dd" formatında oluşturuyoruz
   const formattedDate = `${day < 10 ? '0' + day : day
-    }-${month < 10 ? '0' + month : month}-${year}`;
-
+  }-${month < 10 ? '0' + month : month}-${year}`;
+  
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    console.log("Success:", values);
-    try {
-      const response = await fetch(`${apiUri}/blog`, { method: "POST", headers: { "Content-Type": "application/json",Authorization:`Beare ${token}`}, body: JSON.stringify(values) });
+    
+    const tags = values.tags ? values.tags.split(" ") : [];
 
-      console.log(response);
+    try {
+      const response = await fetch(`${apiUri}/blog`, { method: "POST", headers: { "Content-Type": "application/json",Authorization:`Bearer ${token}`}, body: JSON.stringify({...values,tags:tags}) });
+      const data = await response.json();
       if(response.ok){
         message.success("Blog olusturuldu");
         form.resetFields();
       }else{
         message.error("Blog olusturulamadi."); 
+        console.log(data.message);
       }
     }
-    catch (err) {
-      console.log("Hata : " + err);
+    catch (err:any) {
+      console.log("Hata : " + err.message);
       message.error("Server hatasi.");
     }
   };

@@ -14,7 +14,7 @@ const GetAllBookmarks = async (req: Request, res: Response): Promise<string | an
 const CreateBookmark = async (req: Request, res: Response): Promise<string | any> => {
     try {
 
-        const { name, description, url } = req.body;
+        const { url } = req.body;
 
         const existingBookmark = await Bookmark.findOne({ url });
 
@@ -22,9 +22,12 @@ const CreateBookmark = async (req: Request, res: Response): Promise<string | any
             return res.status(400).json({ message: "This uri already existing" });
         }
 
-        const newBookmark = new Bookmark({ name, description, url });
+        console.log(req.body);
+
+        const newBookmark = new Bookmark(req.body);
         await newBookmark.save();
 
+        return res.status(201).json({ message: "Bookmark successfully created" });
     } catch (error) {
         res.status(500).json({ message: "Server errors" });
     }

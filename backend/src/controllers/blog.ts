@@ -14,6 +14,8 @@ const CreateBlog = async (req: Request, res: Response): Promise<string|any> => {
     try {
         const { title, date, description, tags } = req.body;
 
+        console.log(req.body);
+
         const existingBlog = await Blog.findOne({ title });
 
         if (existingBlog) {
@@ -26,7 +28,7 @@ const CreateBlog = async (req: Request, res: Response): Promise<string|any> => {
 
         const newBlog = new Blog({
             title,
-            date: date || new Date(),
+            date: new Date(),
             description,
             tags,
         });
@@ -35,7 +37,7 @@ const CreateBlog = async (req: Request, res: Response): Promise<string|any> => {
 
         return res.status(201).json({ message: "Blog successfully created" });
     } catch (error) {
-        return res.status(500).json({ message: "Server Error" });
+        return res.status(500).json({ message: `Server Error :${error}` });
     }
 };
 

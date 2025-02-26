@@ -1,13 +1,13 @@
 import { Schema,model,Document } from "mongoose";
 
 interface IBookmark extends Document {
-    name:string,
+    title:string,
     description?:string,
     url:string
 }
 
 const BookmarkSchema = new Schema<IBookmark>({
-    name:{
+    title:{
         type:String,
         required:[true,"Name is required"],
         unique:true,

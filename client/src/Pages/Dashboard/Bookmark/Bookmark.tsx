@@ -1,41 +1,94 @@
-import { Table } from "antd";
+import { message, Popconfirm, Space, Table } from "antd";
+import { DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
+import { useCallback, useEffect, useState } from "react";
+
+interface BookmarkPost {
+  name: string,
+  description?: string,
+  url: string
+}
 
 const Bookmark = () => {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+
+  const apiUri = import.meta.env.VITE_API_URI;
+  const [bookmarkData, setBookmarkData] = useState<BookmarkPost[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const fetchBookmark = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${apiUri}/bookmark`);
+      if (!response.ok) throw new Error("Giriş yaparken bir hata oluştu");
+
+      const data = await response.json();
+      setBookmarkData(data.bookmarks.map((bookmark: any) => ({
+        ...bookmark,
+        key: bookmark.id || bookmark.title, // Unique key assignment
+      })));
+
+    } catch (error) {
+      console.error("Giriş hatası:", error);
+      message.error("Bir hata oluştu, lütfen tekrar deneyin.");
+    } finally {
+      setLoading(false);
+    }
+  }, [apiUri]);
+
+  useEffect(() => {
+    fetchBookmark();
+  }, [fetchBookmark]);
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Baslik",
+      dataIndex: "title",
+      key: "title",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "URL",
+      dataIndex: "url",
+      key: "url",
     },
     {
-      title: "Address",
+      title: "Actions",
       dataIndex: "address",
       key: "address",
     },
+    {
+      title: "Actions",
+      dataIndex: "actions",
+      key: "actions",
+      render: (_: any, record: BookmarkPost) => (
+        <Space size="large" >
+          <EditTwoTone
+            type="primary"
+            onClick={() => {
+              // navigate(`/admin/products/update/${record._id}`);
+              console.log(record);
+            }}
+          >
+            Düzenle
+          </EditTwoTone >
+          <Popconfirm
+            title="Yer Isareti silme"
+            description="Yer Isareti silinmesini istiyor musunuz?"
+            okText="Evet"
+            cancelText="Hayır"
+            onConfirm={() => {
+              // deleteProduct(record._id); // `record._id` ile silme işlemi
+            }}
+          >
+            <DeleteTwoTone  twoToneColor="#eb2f96">
+              Sil
+            </DeleteTwoTone >
+          </Popconfirm>
+        </Space>
+      ),
+    },
   ];
 
-  return(
-    <Table dataSource={dataSource} columns={columns} />
+  return (
+    <Table loading={loading} dataSource={bookmarkData} columns={columns} />
   );
 };
 
